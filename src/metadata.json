@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "path": "/projetos/caloriflix",
+      "title": "Caloriflix — UI Design e Web Experience | Gabriel Cruz",
+      "description": "Estudo de caso do Caloriflix: UI Design e Web Experience para apresentar um aplicativo de acompanhamento alimentar. Projeto de 2025, realizado em colaboração com o time.",
+      "image": "/images/caloriflix/hero.webp"
+    },
+    {
+      "path": "/projetos/santa-maria",
+      "title": "Santa Maria — UI Design e Redesign de Website | Gabriel Cruz",
+      "description": "Estudo de caso Santa Maria: redesign do website de uma imobiliária e construtora de Chapecó, SC. UI Design e sistema visual em colaboração com o time, em 2025.",
+      "image": "/images/santa-maria/home.webp"
+    },
+    {
+      "path": "/projetos/discover",
+      "title": "Discover — UI Design e Redesign de Landing Page | Gabriel Cruz",
+      "description": "Estudo de caso Discover, da Rocketseat: redesign da landing page de um curso gratuito de programação. UI Design em colaboração com o time, em 2023.",
+      "image": "/images/discover/hero.webp"
+    }
+  ]
+}
