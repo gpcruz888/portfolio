@@ -118,21 +118,26 @@ footer{border-top:1px solid var(--border);padding-block:26px 34px;display:flex;j
 .client-section{padding-top:80px;padding-bottom:40px}
 .client-heading,.selected-work-heading{display:flex;justify-content:space-between;align-items:end;gap:40px}
 .client-heading p,.selected-work-heading p{max-width:300px;margin:0;font-size:17px;line-height:1.65;color:var(--text-secondary)}
-.client-logos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;padding:0;margin:46px 0 0;border-top:1px solid var(--border);border-left:1px solid var(--border)}
-.client-logos li{display:flex;align-items:center;justify-content:center;min-height:124px;padding:30px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.client-logos{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 64px)/5);gap:16px;list-style:none;padding:0;margin:46px 0 0;}
+.client-logos li{display:flex;align-items:center;justify-content:center;min-height:124px;padding:30px;border:1px solid var(--border);scroll-snap-align:start}
 .client-logos img{width:100%;max-width:156px;height:54px;object-fit:contain;filter:brightness(0) invert(1);opacity:.72}
 .selected-work{padding-top:10px;padding-bottom:100px}
 .selected-work-heading{margin-bottom:42px}
-.work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.work-thumbnail{display:block;position:relative;overflow:hidden;background:var(--surface);aspect-ratio:808/632}
+.work-grid{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px}
+.work-thumbnail{display:block;position:relative;overflow:hidden;background:var(--surface);aspect-ratio:808/632;scroll-snap-align:start}
 .work-thumbnail[hidden]{display:none}
 .work-thumbnail img{display:block;width:100%;height:100%;object-fit:contain;transition:transform var(--transition)}
 .work-thumbnail:hover img{transform:scale(1.025)}
 .work-zoom{position:absolute;right:14px;bottom:14px;display:grid;place-items:center;background:var(--bg);color:var(--accent);width:36px;height:36px;border-radius:50%;font-size:22px}
-.work-toggle{display:flex;align-items:center;justify-content:space-between;gap:30px;margin:32px auto 0;padding:16px 22px;border:1px solid var(--border);background:transparent;color:var(--text);font:inherit;font-size:14px;cursor:pointer}
-.work-toggle:hover{border-color:var(--accent)}
-.work-toggle span{color:var(--accent);font-size:22px}
-@media(max-width:1000px){.client-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.carousel-track{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding:0;column-gap:20px}
+.carousel-track::-webkit-scrollbar{display:none}
+.client-logos.carousel-track{column-gap:16px}
+.carousel-track:focus-visible{outline-offset:4px}
+.carousel-controls{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}
+.carousel-controls button{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--accent);font:inherit;font-size:24px;cursor:pointer;transition:border-color var(--transition),opacity var(--transition)}
+.carousel-controls button:hover:not(:disabled){border-color:var(--accent)}
+.carousel-controls button:disabled{opacity:.25;cursor:default}
+@media(max-width:1000px){.client-logos{grid-auto-columns:calc((100% - 32px)/3)}.work-grid{grid-auto-columns:calc((100% - 20px)/2)}}
 @media(max-width:640px){
   .client-section{padding-top:55px;padding-bottom:10px}
   .client-heading,.selected-work-heading{flex-direction:column;align-items:start;gap:22px}
@@ -142,7 +147,7 @@ footer{border-top:1px solid var(--border);padding-block:26px 34px;display:flex;j
   .client-logos img{height:40px}
   .selected-work{padding-bottom:65px}
   .selected-work-heading{margin-bottom:28px}
-  .work-grid{grid-template-columns:1fr;gap:16px}
+  .work-grid{grid-auto-columns:88%;gap:16px}.client-logos{grid-auto-columns:42%}.carousel-controls{margin-top:20px}
 }
 /* Shared case composition */
 .case-opening{padding-top:140px}
