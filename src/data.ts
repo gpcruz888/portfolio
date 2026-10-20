@@ -24,9 +24,13 @@ export const projects: Project[] = [{
   imageAlt: 'Hero original da landing page Discover da Rocketseat, com apresentação do curso gratuito e chamada para criar uma conta.',
   path: '/projetos/discover', visible: true,
 }];
+export const contactDetails = {
+  email: 'gabriel@feitojunto.com',
+  whatsapp: { display: '(11) 4689-8620', href: 'https://wa.me/551146898620' },
+};
 export const contactLinks: { label: string; href: string }[] = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/gabriel-cruz-09367b1a1/' }, { label: 'Behance', href: 'https://www.behance.net/gabrielcruz9' },
-  { label: 'E-mail', href: 'mailto:gabriel@feitojunto.com' }, { label: 'Currículo', href: '/gabriel-cruz-curriculo.pdf' },
+  { label: 'E-mail', href: `mailto:${contactDetails.email}` }, { label: 'Currículo', href: '/gabriel-cruz-curriculo.pdf' },
 ];
 export const skillAreas = [
   { title: 'Design', items: ['Product Design', 'UX/UI Design', 'Design Systems', 'Prototipação', 'Arquitetura da Informação', 'Design de Interação'] },

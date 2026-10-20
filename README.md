@@ -1,6 +1,6 @@
 # Gabriel Cruz — Portfólio
 
-Portfólio editorial em dark mode permanente, implementado em React, TypeScript e Tailwind CSS, com Vite e Satoshi hospedada localmente. As cores estão centralizadas em tokens CSS: fundos #09090B, #111113 e #18181B, bordas #27272A, texto #F4F4F5, texto secundário #A1A1AA, texto discreto #71717A e acento pontual #C6FF3D.
+Portfólio com alternância editorial entre áreas escuras e claras, implementado em React, TypeScript e Tailwind CSS, com Vite e Satoshi hospedada localmente. As cores estão centralizadas em tokens CSS: fundos #09090B, #111113 e #18181B, bordas #27272A, texto #F4F4F5, texto secundário #A1A1AA, texto discreto #71717A e acento pontual #C6FF3D.
 
 ## Executar
 
@@ -46,11 +46,12 @@ Os contatos oficiais estão ativos:
 - LinkedIn: https://www.linkedin.com/in/gabriel-cruz-09367b1a1/
 - Behance: https://www.behance.net/gabrielcruz9
 - E-mail: mailto:gabriel@feitojunto.com
+- WhatsApp: https://wa.me/551146898620 — número informado: (11) 4689-8620, com código do Brasil +55.
 - Currículo: /gabriel-cruz-curriculo.pdf
 
-LinkedIn, Behance e o PDF abrem em nova aba com `rel="noopener noreferrer"`. O e-mail utiliza diretamente `mailto:`. O currículo é o PDF original fornecido, sem alterações. O link não contém o atributo `download`, e o servidor de prévia não envia `Content-Disposition: attachment`.
+LinkedIn, Behance, WhatsApp e o PDF abrem em nova aba com `rel="noopener noreferrer"`. O e-mail utiliza diretamente `mailto:`. O currículo é o PDF original fornecido, sem alterações. O link não contém o atributo `download`, e o servidor de prévia não envia `Content-Disposition: attachment`.
 
-Microtítulos, overlines e numeração das seções foram removidos do JSX e dos dados obsoletos. A identificação junto à foto é Product Designer · Full-Stack · Mobile, com Product Designer como foco principal. A apresentação e o Sobre representam a atuação em design e desenvolvimento web e mobile. As competências estão organizadas em Design, Desenvolvimento Web e Desenvolvimento Mobile. Os títulos principais, textos narrativos, fotos, imagens dos projetos, ordem e rotas foram preservados. O layout das introduções foi reorganizado para não deixar colunas vazias. Não há alternância de tema. `color-scheme: dark`, cor de tema do navegador, foco, hover e seleção utilizam a nova paleta.
+Microtítulos, overlines e numeração das seções foram removidos do JSX e dos dados obsoletos. A identificação junto à foto é Product Designer · Full-Stack · Mobile, com Product Designer como foco principal. A apresentação e o Sobre representam a atuação em design e desenvolvimento web e mobile. As competências estão organizadas em Design, Desenvolvimento Web e Desenvolvimento Mobile. Os títulos principais, textos narrativos, fotos, imagens dos projetos, ordem e rotas foram preservados. O layout das introduções foi reorganizado para não deixar colunas vazias. Não há botão de alternância de tema. Hero, projetos, cases e Contato permanecem escuros; o Sobre utiliza um bloco claro em largura total (#F7F7F5), com texto #171717, texto secundário #57575E e divisórias #D9D9D4. A página conserva color-scheme: dark, e a seção clara declara color-scheme: light localmente. O verde-lima permanece nas áreas escuras; no fundo claro, o tom #3D5A08 garante contraste.
 
 Não foram inventadas métricas, pesquisas ou responsabilidades individuais.
 
@@ -75,7 +76,7 @@ As imagens mantêm os arquivos originais de 2432 × 1800 px. As imagens principa
 - Build TypeScript e Vite concluído.
 - HTML estático e SEO específicos gerados para os três cases.
 - Rotas verificadas por HTTP.
-- Quatro páginas verificadas em 1440, 768 e 390 px, sem transbordamento horizontal, fundos claros na estrutura ou microtítulos. As cores originais das imagens foram preservadas.
+- Quatro páginas verificadas em 1440, 768 e 390 px, sem transbordamento horizontal ou microtítulos. A seção Sobre agora é propositalmente clara, em contraste com o restante do site. As cores originais das imagens foram preservadas.
 - Conteúdo textual do Caloriflix comparado com a versão anterior e preservado integralmente.
 - Textos narrativos, imagens, ordem e rotas dos três cases preservados na migração para dark mode.
 - Navegação entre os cases e retorno à home implementados.
@@ -85,6 +86,10 @@ As imagens mantêm os arquivos originais de 2432 × 1800 px. As imagens principa
 
 ## Publicação
 
-A identidade do Site existente foi mantida em `.openai/hosting.json`. A sincronização com Sites foi bloqueada anteriormente pela revisão automática de aprovação, sem detalhar um motivo específico; esta versão não foi publicada. Nenhuma credencial foi gravada neste projeto ou no arquivo ZIP.
+A identidade do Site existente foi mantida em `.openai/hosting.json`. O envio ao repositório privado do Sites foi bloqueado pela revisão automática por considerar que o pedido de ajustes visuais não autorizava explicitamente a publicação externa. Esta versão está validada localmente e não foi publicada. Nenhuma credencial foi gravada neste projeto ou no arquivo ZIP.
 
 Para outra hospedagem estática, envie o conteúdo de `dist/` a um servidor HTTP. O HTML deve ser servido por HTTP; abrir diretamente por file:// não é suportado.
+
+## Referência de composição
+
+A alternância entre blocos escuros e claros e a apresentação direta de contatos foram adaptadas da referência https://jonasmilan.cc/. Os textos, a foto, a identidade verde-lima, os projetos e as rotas de Gabriel foram preservados. Não foram importados depoimentos, métricas ou credenciais pessoais da referência.

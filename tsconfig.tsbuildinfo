@@ -1,1 +1,1 @@
-{"root":["./src/casecomponents.tsx","./src/casepage.tsx","./src/discoverpage.tsx","./src/santamariapage.tsx","./src/data.ts","./src/discover.ts","./src/main.tsx","./src/santamaria.ts"],"version":"5.9.3"}
+{"root":["./src/casecomponents.tsx","./src/casepage.tsx","./src/discoverpage.tsx","./src/santamariapage.tsx","./src/selectedwork.tsx","./src/data.ts","./src/discover.ts","./src/main.tsx","./src/santamaria.ts"],"version":"5.9.3"}
