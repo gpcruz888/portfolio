@@ -129,7 +129,7 @@ footer{border-top:1px solid var(--border);padding-block:26px 34px;display:flex;j
 .work-thumbnail img{display:block;width:100%;height:100%;object-fit:contain;transition:transform var(--transition)}
 .work-thumbnail:hover img{transform:scale(1.025)}
 .work-zoom{position:absolute;right:14px;bottom:14px;display:grid;place-items:center;background:var(--bg);color:var(--accent);width:36px;height:36px;border-radius:50%;font-size:22px}
-.carousel-track{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding:0;column-gap:20px}
+.carousel-track{overflow-x:auto;scroll-snap-type:none;scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding:0;column-gap:20px}
 .carousel-track::-webkit-scrollbar{display:none}
 .client-logos.carousel-track{column-gap:16px}
 .carousel-track:focus-visible{outline-offset:4px}
