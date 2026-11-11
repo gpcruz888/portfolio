@@ -7,7 +7,7 @@ const works = assets.filter(asset => !asset.logo);
 function useCarousel<T extends HTMLElement>() {
   const ref = useRef<T>(null);
   const resumeAt = useRef(0);
-  const [playing, setPlaying] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const [playing, setPlaying] = useState(true);
   const [edges, setEdges] = useState({ start: true, end: false });
   useEffect(() => {
     const track = ref.current;
@@ -24,15 +24,8 @@ function useCarousel<T extends HTMLElement>() {
     return () => { observer.disconnect(); track.removeEventListener('scroll', update); };
   }, []);
   useEffect(() => {
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => { if (preference.matches) setPlaying(false); };
-    preference.addEventListener('change', update);
-    return () => preference.removeEventListener('change', update);
-  }, []);
-  useEffect(() => {
     const track = ref.current;
     if (!track || !playing) return;
-    const section = track.closest('section');
     let visible = false;
     let direction = 1;
     let previousTime = 0;
@@ -51,15 +44,15 @@ function useCarousel<T extends HTMLElement>() {
     const animate = (now: number) => {
       const elapsed = previousTime ? Math.min(now - previousTime, 50) : 0;
       previousTime = now;
-      const hover = window.matchMedia('(hover: hover)').matches && section?.matches(':hover');
-      if (visible && !document.hidden && !hover && !touching && !section?.matches(':focus-within') && now >= resumeAt.current) {
+      const keyboardReading = track.querySelector('a:focus-visible');
+      if (visible && !document.hidden && !touching && !keyboardReading && now >= resumeAt.current) {
         const limit = track.scrollWidth - track.clientWidth;
         if (track.scrollLeft >= limit - 1) direction = -1;
         else if (track.scrollLeft <= 1) direction = 1;
-        fractionalDistance += direction * elapsed * 0.035;
+        fractionalDistance += direction * elapsed * 0.05;
         const pixels = Math.trunc(fractionalDistance);
         if (pixels) {
-          track.scrollLeft += pixels;
+          track.scrollTo({ left: track.scrollLeft + pixels, behavior: 'instant' });
           fractionalDistance -= pixels;
         }
       }

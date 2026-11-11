@@ -1,0 +1,76 @@
+name: Deploy to HostGator (cPanel)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy via FTPS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar build de produção
+        env:
+          SITE_ORIGIN: https://gabrielcruz.tech
+        run: npm run build
+
+      - name: Publicar via FTPS (HostGator/cPanel)
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ./
+          dangerous-clean-slate: false
+          dry-run: true
+          log-level: standard
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/.env
+            **/.env.*
+            **/*.pem
+            **/*.key
+            **/*.p12
+            **/*.pfx
+            **/credentials*
+            **/secrets*
+            **/.DS_Store
+            **/Thumbs.db
+            **/.openai/**
+            **/.vscode/**
+            **/.idea/**
+            **/src/**
+            **/scripts/**
+            **/package*.json
+            **/tsconfig*.json
+            **/vite.config.*
+            **/*.tsbuildinfo
+            **/*.map
+
