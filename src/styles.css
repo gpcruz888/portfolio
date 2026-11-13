@@ -1,9 +1,11 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
+@source './*.tsx';
 @font-face{font-family:Satoshi;src:url('/fonts/Satoshi-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:Satoshi;src:url('/fonts/Satoshi-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:Satoshi;src:url('/fonts/Satoshi-Bold.woff2') format('woff2');font-weight:700 900;font-display:swap}
 :root{
   color-scheme:dark;
+  --header-height:92px;
   --bg:#09090B;
   --bg-secondary:#111113;
   --surface:#18181B;
@@ -27,7 +29,8 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:105px}
-body{margin:0;background:var(--bg)}
+body{margin:0;background:var(--bg);text-transform:lowercase}
+button{ text-transform:inherit }
 a{color:inherit;text-decoration:none;transition:color var(--transition),border-color var(--transition)}
 a:hover{color:var(--accent)}
 button,a{-webkit-tap-highlight-color:transparent}
@@ -36,7 +39,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 h1,h2,h3,p{margin-top:0}
 .wrap,.header-inner{width:calc(100% - 112px);max-width:1440px;margin-inline:auto}
 .accent{color:var(--accent)}
-header{height:92px;position:fixed;inset:0 0 auto;z-index:20;background:var(--bg)}
+header{height:var(--header-height);position:fixed;inset:0 0 auto;z-index:20;background:var(--bg)}
 .header-inner{display:flex;height:100%;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .logo{font-size:25px;font-weight:700;letter-spacing:-1.1px}
 .logo .accent{font-size:32px}
@@ -54,7 +57,9 @@ h3{font-size:46px;line-height:1.1;letter-spacing:-2px;font-weight:500;margin:14p
 .hero-role{font-size:11px;line-height:1.65;letter-spacing:.2px;color:var(--text-secondary);white-space:normal;text-wrap:balance}
 .hero-role strong{font-weight:500;color:var(--text)}
 .hero-content{min-width:0}
-.hero-content h1{margin:0 0 42px;max-width:100%}
+.hero-content h1{margin:0 0 42px;max-width:100%;font-size:clamp(48px,6.2vw,104px)}
+.hero-content h1 span{display:block;text-wrap:balance}
+.hero-headline-secondary{color:var(--text-secondary)}
 .hero-bottom{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:50px}
 .hero-description{font-size:17px;line-height:1.65;max-width:534px;margin:0;color:var(--text-secondary)}
 .hero-cta{justify-self:end;display:flex;align-items:center;gap:26px;font-size:15px;font-weight:500}
@@ -63,7 +68,9 @@ h3{font-size:46px;line-height:1.1;letter-spacing:-2px;font-weight:500;margin:14p
 .arrow-circle .arrow{font-size:27px}
 .hero-cta:hover .arrow-circle{border-color:var(--accent)}
 a:hover .arrow{transform:translateX(3px);color:var(--accent)}
-.projects{padding-top:86px;padding-bottom:34px}
+.projects{position:relative;padding-top:86px;padding-bottom:34px}
+.projects #projetos{position:absolute;top:0}
+.cases-title{margin-bottom:36px}
 .project{margin-bottom:86px}
 .project+.project{margin-top:90px}
 .project-image-link{display:block;outline-offset:8px}
@@ -71,7 +78,7 @@ a:hover .arrow{transform:translateX(3px);color:var(--accent)}
 .project-image img{display:block;width:100%;height:100%;object-fit:contain;transition:transform var(--transition)}
 .project-image-link:hover img{transform:scale(1.015)}
 .project-details{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding-top:35px}
-.featured-project h2{font-size:64px;letter-spacing:-3px}
+.featured-project h3{margin:0;font-size:64px;line-height:1.1;letter-spacing:-3px}
 .project-description{font-size:17px;line-height:1.7;margin:0;color:var(--text-secondary)}
 .project-skills{font-size:13px;line-height:1.8;color:var(--text-secondary);margin:17px 0 0}
 .text-link{display:inline-flex;gap:22px;align-items:center;font-size:14px;font-weight:500;border-bottom:1px solid var(--border);padding-bottom:8px}
@@ -213,15 +220,15 @@ footer{border-top:1px solid var(--border);padding-block:26px 34px;display:flex;j
 @media(max-width:959px) and (min-width:641px){.hero{padding-top:145px}.hero-content h1{margin-top:6px}.contact .section-intro{grid-template-columns:1fr}.contact-links{gap:30px}.contact .section-description{max-width:580px}}
 @media(max-width:640px){
   .wrap,.header-inner{width:calc(100% - 40px)}
-  header{height:76px}.logo{font-size:20px}header nav{gap:20px;font-size:12px}
+  :root{--header-height:76px}.logo{font-size:20px}header nav{gap:clamp(8px,2.7vw,20px);font-size:12px}
   .hero{padding-top:120px;padding-bottom:35px}.hero-grid{gap:28px}.hero-avatar{width:56px;height:56px;flex-basis:56px}
   h1{font-size:clamp(50px,11.7vw,75px);line-height:1.07;letter-spacing:-.06em}
-  .hero-content h1{margin:0 0 30px}.desktop-break{display:none}
+  .hero-content h1{margin:0 0 30px;font-size:clamp(32px,8.7vw,54px)}
   .hero-bottom{grid-template-columns:1fr;gap:29px}.hero-description{font-size:15px;line-height:1.7;max-width:100%}
   .hero-cta{justify-self:start;font-size:14px;gap:22px}.arrow-circle{width:44px;height:44px}
   .projects{padding-top:55px}.project{margin-bottom:58px}.project+.project{margin-top:60px}
   .section-intro,.project-details,.case-lead,.case-section-intro{grid-template-columns:1fr;gap:25px}
-  h2{font-size:39px;letter-spacing:-1.7px}.featured-project h2{font-size:43px;letter-spacing:-1.9px}
+  h2{font-size:39px;letter-spacing:-1.7px}.featured-project h3{margin:0;font-size:43px;letter-spacing:-1.9px}
   .project-details{padding-top:25px;gap:22px}.project-description{font-size:15px}
   .project-skills{font-size:11px;margin-top:12px}.project-cta{margin-top:23px}
   h3{font-size:34px;letter-spacing:-1.4px;margin:10px 0 20px}
@@ -264,4 +271,5 @@ footer{border-top:1px solid var(--border);padding-block:26px 34px;display:flex;j
 footer{align-items:center}
 .carousel-track{scroll-behavior:auto}
 @media(max-width:640px){.logo img{width:140px}footer{align-items:flex-start}}
-@media(max-width:360px){.logo img{width:120px}header nav{gap:14px}}
+@media(max-width:450px){.logo img{width:108px}header nav{gap:8px}}
+@media(max-width:360px){.logo img{width:80px}header nav{font-size:11px}}

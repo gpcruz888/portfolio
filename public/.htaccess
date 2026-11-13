@@ -1,0 +1,36 @@
+# gabrielcruz.tech — rotas do portfólio estático (Vite) e dos projetos ao vivo.
+DirectoryIndex index.html
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+</IfModule>
+
+# O manifesto do deploy não precisa ser público.
+<IfModule mod_authz_core.c>
+  <Files ".ftp-deploy-sync-state.json">
+    Require all denied
+  </Files>
+  <FilesMatch "^\.env">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Arquivos e pastas reais: cases, projetos ao vivo, assets, fontes, imagens e PDF.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # /projetos/caloriflix e as demais rotas que possuem index.html na pasta.
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+?)/?$ /$1/index.html [L]
+
+  # Demais caminhos da aplicação.
+  RewriteRule ^ /index.html [L]
+</IfModule>

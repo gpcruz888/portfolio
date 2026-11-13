@@ -88,7 +88,7 @@ function CarouselControls({ id, label, edges, move, playing, togglePlaying }: { 
 }
 
 export function ClientLogos() {
-  const { ref, edges, move, playing, togglePlaying } = useCarousel<HTMLUListElement>();
+  const { ref, move } = useCarousel<HTMLUListElement>();
   return <section className="client-section wrap" aria-labelledby="clients-title" aria-roledescription="carrossel">
     <div className="client-heading reveal">
       <h2 id="clients-title">Mais de <span className="accent">200</span><br/>projetos criados<span className="accent">.</span></h2>
@@ -97,7 +97,6 @@ export function ClientLogos() {
     <ul ref={ref} id="client-carousel" className="client-logos carousel-track" aria-label="Marcas atendidas" tabIndex={0} onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } }}>
       {clients.map(client => <li key={client.path}><img src={client.path} alt={client.name} loading="lazy" decoding="async" width="180" height="64"/></li>)}
     </ul>
-    <CarouselControls id="client-carousel" label="logos" edges={edges} move={move} playing={playing} togglePlaying={togglePlaying}/>
   </section>;
 }
 

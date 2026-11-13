@@ -1,0 +1,18 @@
+[
+  {
+    "id": "01",
+    "slug": "morada-urbana",
+    "title": "Morada Urbana",
+    "category": "Arquitetura residencial",
+    "description": "Catálogo de arquitetura residencial com fotografias amplas e detalhes para comparar propostas de moradia.",
+    "cover": "fachada.jpg"
+  },
+  {
+    "id": "02",
+    "slug": "prumo-financeiro",
+    "title": "Prumo Financeiro",
+    "category": "Planejamento financeiro",
+    "description": "Site para pequenas empresas explorarem soluções de fluxo de caixa, precificação e planejamento.",
+    "cover": "equipe.jpg"
+  }
+]

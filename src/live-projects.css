@@ -1,0 +1,194 @@
+.live-projects {
+  --stage-height: calc(100svh - var(--header-height));
+  min-height: calc(var(--stage-height) + var(--slide-steps) * 50svh);
+}
+
+.live-projects-stage {
+  position: sticky;
+  top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(12px, 3vh, 32px);
+  height: var(--stage-height);
+  padding-block: clamp(8px, 2vh, 24px);
+  background: var(--bg);
+}
+
+.live-projects h2 {
+  font-size: clamp(30px, 5.6vmin, 60px);
+}
+
+.live-projects-panel {
+  color-scheme: light;
+  color: #151515;
+  background: white;
+  padding-block: clamp(8px, 3vh, 36px);
+}
+
+.live-projects-layout {
+  --controls-width: max(160px, 24%);
+  --controls-gap: clamp(12px, 2vw, 30px);
+  --description-height: clamp(112px, 16svh, 180px);
+  position: relative;
+}
+
+.live-projects-slider {
+  width: 100%;
+}
+
+.live-projects-cover {
+  height: min(49svh, 58vw);
+  overflow: hidden;
+  margin-bottom: clamp(8px, 2vh, 30px);
+}
+
+.live-projects-cover > div {
+  height: 100%;
+  background: #f2f2f2;
+}
+
+.live-projects-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.live-projects-description,
+.live-projects-controls {
+  display: flex;
+  align-items: center;
+  height: var(--description-height);
+}
+
+.live-projects-description-slot {
+  margin-inline-end: calc(var(--controls-width) + var(--controls-gap));
+  overflow: clip;
+}
+
+.live-projects-description {
+  overflow: hidden;
+  padding-inline: clamp(16px, 4vw, 60px);
+  background: #f2f2f2;
+}
+
+.live-projects-category {
+  margin: 0 0 5px;
+  color: #8a4a00;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.live-projects-description h3 {
+  margin: 0;
+  font-size: clamp(16px, 3vmin, 28px);
+  letter-spacing: -.025em;
+}
+
+.live-projects-link {
+  color: #151515;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .24em;
+}
+
+.live-projects-link:hover {
+  color: #39580a;
+}
+
+.live-projects-link:focus-visible {
+  outline-color: #39580a;
+  outline-offset: 2px;
+}
+
+.live-projects-summary {
+  margin: 5px 0 0;
+  max-width: 65ch;
+  color: #484848;
+  font-size: clamp(12px, 2.4vmin, 15px);
+  line-height: 1.35;
+}
+
+.live-projects-controls {
+  position: absolute;
+  inset: auto 0 0 auto;
+  z-index: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.live-projects-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-projects-buttons span {
+  padding-inline: 5px;
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+
+.live-projects-buttons button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: black;
+  color: var(--accent);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.live-projects-buttons button:disabled {
+  color: color-mix(in srgb, var(--accent) 50%, black);
+  cursor: default;
+}
+
+.live-projects-buttons button:focus-visible {
+  outline-color: black;
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .live-projects-layout {
+    --description-height: 120px;
+  }
+
+  .live-projects-cover {
+    height: min(40svh, 65vw);
+  }
+
+  .live-projects-description-slot {
+    margin-inline-end: 0;
+  }
+
+  .live-projects-controls {
+    position: static;
+    height: auto;
+    margin-top: 8px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (max-height: 600px) {
+  .live-projects-cover {
+    height: min(33svh, 65vw);
+  }
+}
+
+@media (max-height: 500px) {
+  .live-projects-cover {
+    height: 27svh;
+  }
+}

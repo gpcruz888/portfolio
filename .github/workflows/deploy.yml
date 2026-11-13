@@ -24,8 +24,8 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: npm
 
       - name: Instalar dependências
         run: npm ci
@@ -35,6 +35,24 @@ jobs:
           SITE_ORIGIN: https://gabrielcruz.tech
         run: npm run build
 
+      - name: Conferir arquivos publicados
+        run: |
+          test -f dist/index.html
+          test -f dist/.htaccess
+          test -f dist/gabriel-cruz-curriculo.pdf
+          test -f dist/projetos/caloriflix/index.html
+          test -f dist/projetos/santa-maria/index.html
+          test -f dist/projetos/discover/index.html
+          test -f dist/projetos-ao-vivo/morada-urbana/index.html
+          test -f dist/projetos-ao-vivo/morada-urbana/about.html
+          test -f dist/projetos-ao-vivo/morada-urbana/project-grid.html
+          test -f dist/projetos-ao-vivo/prumo-financeiro/index.html
+          test -f dist/projetos-ao-vivo/prumo-financeiro/about.html
+          test -f dist/projetos-ao-vivo/prumo-financeiro/service.html
+
+      # A conta FTP já entra presa em /home1/gabr9766/gabrielcruz.tech/.
+      # server-dir ./ é essa raiz. Não usar public_html.
+      # dangerous-clean-slate permanece falso: o envio não apaga o servidor inteiro.
       - name: Publicar via FTPS (HostGator/cPanel)
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
@@ -43,10 +61,11 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
+          security: loose
           local-dir: ./dist/
           server-dir: ./
           dangerous-clean-slate: false
-          dry-run: true
+          timeout: 120000
           log-level: standard
           exclude: |
             **/.git*
@@ -73,4 +92,3 @@ jobs:
             **/vite.config.*
             **/*.tsbuildinfo
             **/*.map
-

@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import metadata from './src/metadata.json';
+import { liveProjectPages } from './scripts/live-projects.mjs';
 export default defineConfig({
-  plugins: [tailwindcss(), {
+  plugins: [tailwindcss(), liveProjectPages(), {
     name: 'case-static-routes',
     configurePreviewServer(server) {
       server.middlewares.use((req, _res, next) => {
