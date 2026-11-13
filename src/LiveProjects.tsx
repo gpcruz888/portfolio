@@ -4,14 +4,50 @@ import projects from './live-projects.json';
 import './vendor/swiper.css';
 import './live-projects.css';
 
-const lastSlide = projects.length - 1;
+const gymPages = [
+  { title: 'Centro de fitness', file: 'index.html', cover: 'centro-de-fitness.jpg', width: 1400, height: 770 },
+  { title: 'Academia', file: 'home-gym.html', cover: 'academia.jpg', width: 1440, height: 634 },
+  { title: 'Personal trainer', file: 'home-personal-trainer.html', cover: 'personal-trainer.jpg', width: 1440, height: 747 },
+].map(page => ({
+  title: page.title,
+  href: `/projetos/gymcare/${page.file}`,
+  cover: `/images/gymcare/${page.cover}`,
+  width: page.width,
+  height: page.height,
+}));
+
+type ProjectSlide = {
+  title: string;
+  href: string;
+  cover: string;
+  width: number;
+  height: number;
+  category?: string;
+  description?: string;
+};
+
+const livePages = projects.map(project => {
+  const path = `/projetos-ao-vivo/${project.slug}`;
+  return { ...project, href: `${path}/index.html`, cover: `${path}/assets/img/projeto/${project.cover}`, width: 1600, height: 900 };
+});
 
 export function LiveProjects() {
+  return <ProjectCarousel id="projetos-ao-vivo" title="Projetos ao vivo" slides={livePages}/>;
+}
+
+export function GymProjects() {
+  return <ProjectCarousel id="projetos-de-academia" title="Projetos de academia" slides={gymPages} coverOnly/>;
+}
+
+function ProjectCarousel({ id, title, slides, coverOnly = false }: { id: string; title: string; slides: ProjectSlide[]; coverOnly?: boolean }) {
+  const lastSlide = slides.length - 1;
+  const headingId = `${id}-title`;
+  const slidesId = `${id}-slides`;
   const section = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const slider = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const activeProject = projects[activeSlide];
+  const activeProject = slides[activeSlide];
 
   function scrollRange(sectionElement: HTMLElement, stageElement: HTMLElement) {
     const stickyTop = parseFloat(getComputedStyle(stageElement).top);
@@ -57,7 +93,7 @@ export function LiveProjects() {
       reducedMotion.removeEventListener('change', scheduleUpdate);
       swiper.destroy();
     };
-  }, []);
+  }, [lastSlide]);
 
   function goToSlide(index: number) {
     if (!section.current || !stage.current) return;
@@ -69,47 +105,46 @@ export function LiveProjects() {
     });
   }
 
-  return <section ref={section} className="live-projects" id="projetos-ao-vivo"
-    aria-labelledby="live-projects-title" style={{ '--slide-steps': lastSlide } as CSSProperties}>
+  return <section ref={section} className={coverOnly ? 'live-projects live-projects-previews' : 'live-projects'} id={id}
+    aria-labelledby={headingId} style={{ '--slide-steps': lastSlide } as CSSProperties}>
     <div ref={stage} className="live-projects-stage">
       <div className="wrap">
-        <h2 id="live-projects-title">Projetos ao vivo<span className="accent">.</span></h2>
+        <h2 id={headingId}>{title}<span className="accent">.</span></h2>
       </div>
       <div className="live-projects-panel">
         <div className="live-projects-layout wrap">
-          <div ref={slider} className="swiper live-projects-slider" aria-roledescription="carrossel" role="group" aria-labelledby="live-projects-title">
-            <div className="swiper-wrapper" id="live-projects-slides">
-              {projects.map((project, index) => {
-                const path = `/projetos-ao-vivo/${project.slug}`;
-                return <article key={project.id} className="swiper-slide" aria-hidden={index !== activeSlide}>
+          <div ref={slider} className="swiper live-projects-slider" aria-roledescription="carrossel" role="group" aria-labelledby={headingId}>
+            <div className="swiper-wrapper" id={slidesId}>
+              {slides.map((project, index) => (
+                <article key={project.href} className="swiper-slide" aria-hidden={index !== activeSlide}>
                   <div data-swiper-parallax="-30">
                     <div className="live-projects-cover" aria-hidden="true">
                       <div data-swiper-parallax-scale="1.3">
-                        <img src={`${path}/assets/img/projeto/${project.cover}`} alt="" width="1600" height="900" decoding="async"/>
+                        <img src={project.cover} alt="" width={project.width} height={project.height} loading={coverOnly ? 'lazy' : undefined} decoding="async"/>
                       </div>
                     </div>
-                    <div className="live-projects-description-slot">
+                    {!coverOnly && <div className="live-projects-description-slot">
                       <div className="live-projects-description" data-swiper-parallax-x="104%" data-swiper-parallax-opacity="0">
                         <div data-swiper-parallax-y="100%" data-swiper-parallax-opacity="0">
                           <p className="live-projects-category">{project.category}</p>
-                        <h3>{project.title}</h3>
+                          <h3>{project.title}</h3>
                           <p className="live-projects-summary">{project.description}</p>
                         </div>
                       </div>
-                    </div>
+                    </div>}
                   </div>
-                </article>;
-              })}
+                </article>
+              ))}
             </div>
           </div>
           <div className="live-projects-controls" role="group" aria-label="Navegação do carrossel">
-            <a className="live-projects-link" href={`/projetos-ao-vivo/${activeProject.slug}/index.html`}
+            <a className="live-projects-link" href={activeProject.href}
               aria-label={`Abrir projeto ${activeProject.title}`}>Abrir projeto <span aria-hidden="true">↗</span></a>
             <div className="live-projects-buttons">
-              <span aria-label={`Slide ${activeSlide + 1} de ${projects.length}`}>{activeSlide + 1} / {projects.length}</span>
-              <button type="button" aria-label="Slide anterior" aria-controls="live-projects-slides" disabled={activeSlide === 0}
+              <span aria-label={`Slide ${activeSlide + 1} de ${slides.length}`}>{activeSlide + 1} / {slides.length}</span>
+              <button type="button" aria-label="Slide anterior" aria-controls={slidesId} disabled={activeSlide === 0}
                 onClick={() => goToSlide(activeSlide - 1)}>←</button>
-              <button type="button" aria-label="Próximo slide" aria-controls="live-projects-slides" disabled={activeSlide === lastSlide}
+              <button type="button" aria-label="Próximo slide" aria-controls={slidesId} disabled={activeSlide === lastSlide}
                 onClick={() => goToSlide(activeSlide + 1)}>→</button>
             </div>
           </div>

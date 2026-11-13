@@ -7,7 +7,7 @@ import { SantaMariaPage } from './SantaMariaPage';
 import { DiscoverPage } from './DiscoverPage';
 import metadata from './metadata.json';
 import { ClientLogos } from './SelectedWork';
-import { LiveProjects } from './LiveProjects';
+import { GymProjects, LiveProjects } from './LiveProjects';
 
 if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
 
@@ -63,6 +63,7 @@ function App() {
     <LiveProjects/>
     <ClientLogos/>
     <section id="cases" className="projects wrap" aria-labelledby="cases-title"><span id="projetos" aria-hidden="true"/><h2 id="cases-title" className="cases-title">Cases<span className="accent">.</span></h2>{projects.filter(p => p.visible).map(p => <ProjectCard key={p.id} project={p}/>)}</section>
+    <GymProjects/>
     <section id="sobre" className="about"><div className="wrap"><div className="section-intro reveal"><h2>Entre o design<br/> e o código<span className="accent">.</span></h2><div className="about-copy"><p>Sou Product Designer e desenvolvedor com experiência em produtos digitais, aplicações web e aplicativos mobile. Minha atuação inclui design de interfaces, desenvolvimento front-end, back-end e full-stack, conectando a experiência do usuário à implementação.</p><p>Essa experiência mudou bastante a forma como penso design. Hoje, quando olho para uma tela, não penso apenas na aparência. Quero entender o que a pessoa precisa fazer, quais informações são importantes e como tudo aquilo vai funcionar na prática.</p><p>Gosto de projetos que exigem organização, atenção aos detalhes e boas decisões. Principalmente quando existe muita informação envolvida e o desafio é tornar tudo mais simples de usar.</p></div></div><div className="competencies reveal">{skillAreas.map(area => <div className="skill-area" key={area.title}><h3>{area.title}</h3><ul>{area.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></div></section>
     <section id="contato" className="contact wrap"><div className="section-intro reveal"><h2>Tem algo em mente?<br/> Vamos conversar<span className="accent">.</span></h2><div><p className="section-description">Estou aberto a novas oportunidades em Product Design. Se quiser conhecer melhor meu trabalho ou trocar uma ideia, é só entrar em contato.</p><div className="contact-direct"><a className="direct-contact" href={`mailto:${contactDetails.email}`}>{contactDetails.email}<Arrow/></a><a className="direct-contact" href={contactDetails.whatsapp.href} target="_blank" rel="noopener noreferrer">WhatsApp · {contactDetails.whatsapp.display}<Arrow/></a></div><div className="contact-links">{contactLinks.filter(link => link.label !== 'E-mail').map(link => <a className="contact-link" key={link.label} href={link.href} target={link.href.startsWith('mailto:') ? undefined : '_blank'} rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}>{link.label} <Arrow/></a>)}</div></div></div></section>
   </main>}<footer className="wrap"><div className="footer-brand"><a href="/" aria-label="Gabriel Cruz, início"><img src="/brand/logo-horizontal-fundo-escuro.svg" alt="Gabriel Cruz" width="2015" height="510"/></a><span>© 2026</span></div><span>Design e desenvolvimento por Gabriel Cruz.</span></footer></>;

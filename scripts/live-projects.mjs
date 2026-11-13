@@ -1,9 +1,20 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import projects from '../src/live-projects.json' with { type: 'json' };
 
 const root = new URL('../projetos/', import.meta.url);
 const routes = new Map();
 const directory = '/projetos-ao-vivo/';
+const gymPath = '/projetos/gymcare/';
+const gymRoot = new URL('gymcare/', root);
+
+async function gymFiles() {
+  const entries = await readdir(gymRoot, { recursive: true, withFileTypes: true });
+  return entries.filter(entry => entry.isFile()).map(entry => {
+    const directory = entry.parentPath.slice(decodeURIComponent(gymRoot.pathname).length);
+    return directory ? `${directory}/${entry.name}` : entry.name;
+  }).filter(file => /^(?:css|js|font|icons|image\/[^/]+)\/.+\.(?:css|js|jpg|jpeg|png|svg|webp|gif|woff2?|ttf|eot|avif)$/i.test(file)
+    || /^[^/]+\.html$/.test(file) && file !== 'demo.html');
+}
 
 for (const project of projects) {
   const morada = project.id === '01';
@@ -44,6 +55,20 @@ export function liveProjectPages() {
       });
     },
     async generateBundle() {
+      const gym = await Promise.all((await gymFiles()).map(async file => ({
+        file,
+        source: await readFile(new URL(file, gymRoot)),
+      })));
+      // The original pages use both image/ and gymcare/image/ for local assets.
+      const aliases = new Set(gym.filter(({ file }) => file.endsWith('.html')).flatMap(({ source }) =>
+        [...source.toString().matchAll(/\bgymcare\/(image\/[^"'\s<>)]+)/g)].map(match => match[1])));
+      for (const { file, source } of gym) {
+        this.emitFile({ type: 'asset', fileName: gymPath.slice(1) + file, source });
+        if (aliases.has(file)) {
+          this.emitFile({ type: 'asset', fileName: gymPath.slice(1) + 'gymcare/' + file, source });
+        }
+      }
+
       await Promise.all([...routes].map(async ([path, file]) => {
         this.emitFile({
           type: 'asset',

@@ -192,3 +192,20 @@
     height: 27svh;
   }
 }
+
+.live-projects-previews .live-projects-cover > div {
+  background: #151515;
+  transform: none;
+}
+
+.live-projects-previews .live-projects-cover img {
+  object-fit: contain;
+}
+
+.live-projects-previews .live-projects-controls {
+  position: static;
+  height: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
