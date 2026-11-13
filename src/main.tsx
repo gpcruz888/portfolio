@@ -46,7 +46,10 @@ function App() {
       <div className="hero-grid">
         <div className="hero-identity">
           <img className="hero-avatar" src="/images/gabriel-cruz.png" alt="Gabriel Cruz" width="60" height="60" decoding="async"/>
-          <span className="hero-role"><strong>FULL STACK DEVELOPER</strong> · PRODUCT DESIGNER</span>
+          <p className="hero-role">
+            <strong>Full stack developer</strong>
+            <span><span className="hero-role-dot">·</span> Product designer</span>
+          </p>
         </div>
         <div className="hero-content">
           <h1>
